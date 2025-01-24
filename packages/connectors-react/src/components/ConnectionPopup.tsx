@@ -54,6 +54,8 @@ export const ConnectionPopup = (props: ConnectionPopupContainerProps) => {
   useEffect(() => {
     if (annotation) {
       const setPosition = () => { 
+        if (!midpoint) return;
+
         const { left, top } = anno.element.getBoundingClientRect();
 
         const x = midpoint.x + left;

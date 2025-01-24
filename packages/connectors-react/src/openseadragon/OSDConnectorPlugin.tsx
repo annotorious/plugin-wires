@@ -18,7 +18,7 @@ export const OSDConnectorPlugin = (props: OSDConnectorPluginProps) => {
 
   const viewer = useViewer();
 
-  const ref = useRef<ConnectorPluginInstance>();
+  const ref = useRef<ConnectorPluginInstance>(null);
 
   const [instance, setInstance] = useState<ConnectorPluginInstance>();
 
