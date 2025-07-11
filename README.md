@@ -1,4 +1,4 @@
-# Annotorious Connectors Plugin
+# Annotorious Wires Plugin
 
 An Annotorious plugin for connecting annotation through elbow connectors.
 

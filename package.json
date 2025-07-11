@@ -1,5 +1,5 @@
 {
-  "name": "@annotorious/connectors-monorepo",
+  "name": "@annotorious/wires-monorepo",
   "version": "0.4.0",
   "description": "Annotorious Connectors Plugin Monorepo",
   "author": "Rainer Simon",
@@ -13,7 +13,7 @@
     "test": "npm run test --workspaces"
   },
   "workspaces": [
-    "./packages/connectors",
-    "./packages/connectors-react"
+    "./packages/wires",
+    "./packages/wires-react"
   ]
 }
