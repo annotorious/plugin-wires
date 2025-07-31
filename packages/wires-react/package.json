@@ -16,7 +16,7 @@
     "start": "vite",
     "build": "vite build"
   },
-  "module": "dist/annotorious-connectors-react.es.js",
+  "module": "dist/annotorious-wires-react.es.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -24,7 +24,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/annotorious-connectors-react.es.js"
+      "import": "./dist/annotorious-wires-react.es.js"
     },
     "./annotorious-wires-react.css": "./dist/annotorious-wires-react.css"
   },

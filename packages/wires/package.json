@@ -18,8 +18,8 @@
     "start": "vite",
     "build": "vite build"
   },
-  "main": "./dist/annotorious-connectors.js",
-  "module": "./dist/annotorious-connectors.es.js",
+  "main": "./dist/annotorious-wires.js",
+  "module": "./dist/annotorious-wires.es.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
