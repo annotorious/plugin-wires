@@ -1,6 +1,6 @@
 {
   "name": "@annotorious/plugin-wires-react",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "React bindings for the Annotorious wires plugin.",
   "author": "Rainer Simon",
   "license": "BSD-3-Clause",
@@ -51,7 +51,7 @@
     }
   },
   "dependencies": {
-    "@annotorious/plugin-wires": "0.6.1",
+    "@annotorious/plugin-wires": "0.6.2",
     "@floating-ui/react": "^0.27.15",
     "uuid": "^11.1.0"
   },
