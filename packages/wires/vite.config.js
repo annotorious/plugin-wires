@@ -22,7 +22,7 @@ export default defineConfig({
       name: 'AnnotoriousConnectors',
       formats: ['es', 'umd'],
       fileName: (format) => 
-        format === 'umd' ? `annotorious-connectors.js` : `annotorious-connectors.es.js` 
+        format === 'umd' ? `annotorious-wires.js` : `annotorious-wires.es.js` 
     },
     rollupOptions: {
       external: [
@@ -36,7 +36,7 @@ export default defineConfig({
           '@annotorious/openseadragon': 'AnnotoriousOSD', 
           'openseadragon': 'OpenSeadragon'
         },
-        assetFileNames: 'annotorious-connectors.[ext]'
+        assetFileNames: 'annotorious-wires.[ext]'
       }
     }
   }

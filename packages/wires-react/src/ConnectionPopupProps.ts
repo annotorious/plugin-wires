@@ -1,5 +1,5 @@
 import { AnnotationBody } from '@annotorious/react';
-import { ConnectionAnnotation } from '@annotorious/plugin-connectors';
+import { ConnectionAnnotation } from '@annotorious/plugin-wires';
 
 export interface ConnectionPopupProps {
 

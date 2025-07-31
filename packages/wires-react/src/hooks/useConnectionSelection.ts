@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ImageAnnotation, useSelection } from '@annotorious/react';
-import { ConnectionAnnotation, isConnectionAnnotation, Point } from '@annotorious/plugin-connectors';
+import { ConnectionAnnotation, isConnectionAnnotation, Point } from '@annotorious/plugin-wires';
 import { useConnectorPlugin } from './useConnectorPlugin';
 
 export interface ConnectionSelection {

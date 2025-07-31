@@ -1,5 +1,5 @@
 import { ReactNode, createContext } from 'react';
-import { ConnectorPluginInstance } from '@annotorious/plugin-connectors';
+import { ConnectorPluginInstance } from '@annotorious/plugin-wires';
 
 interface ConnectorPluginProviderProps {
 

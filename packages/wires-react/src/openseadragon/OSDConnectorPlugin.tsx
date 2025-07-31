@@ -1,6 +1,6 @@
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { AnnotoriousPlugin, useViewer } from '@annotorious/react';
-import { mountOSDPlugin } from '@annotorious/plugin-connectors';
+import { mountOSDPlugin } from '@annotorious/plugin-wires';
 import { ImageAnnotator } from '@annotorious/annotorious';
 import { ConnectorPluginProvider } from 'src/ConnectorPluginProvider';
 

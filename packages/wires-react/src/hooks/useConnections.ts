@@ -1,4 +1,4 @@
-import { ConnectionAnnotation, isConnectionAnnotation } from '@annotorious/plugin-connectors';
+import { ConnectionAnnotation, isConnectionAnnotation } from '@annotorious/plugin-wires';
 import { ImageAnnotation, useAnnotations } from '@annotorious/react';
 import { useMemo } from 'react';
 

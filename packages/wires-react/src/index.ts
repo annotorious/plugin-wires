@@ -6,7 +6,7 @@ export * from './ConnectorPlugin';
 export * from './ConnectorPluginProvider';
 
 // Re-publish the stylesheet
-import '@annotorious/plugin-connectors/annotorious-connectors.css';
+import '@annotorious/plugin-wires/annotorious-wires.css';
 
 // Essential re-rexports from base package
 export type {
@@ -16,11 +16,11 @@ export type {
   Point,
   W3CRelationLinkAnnotation,
   W3CRelationMetaAnnotation
-} from '@annotorious/plugin-connectors';
+} from '@annotorious/plugin-wires';
 
 export {
   isConnectionAnnotation,
   isW3CRelationLinkAnnotation,
   isW3CRelationMetaAnnotation,
   W3CImageRelationFormat
-} from '@annotorious/plugin-connectors';
+} from '@annotorious/plugin-wires';
