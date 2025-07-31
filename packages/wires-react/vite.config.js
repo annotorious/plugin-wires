@@ -19,7 +19,7 @@ export default defineConfig({
     lib: {
       entry: './src/index.ts',
       formats: ['es'],
-      fileName: (format) => `annotorious-connectors-react.${format}.js`
+      fileName: (format) => `annotorious-wires-react.${format}.js`
     },
     rollupOptions: {
       external: [
@@ -30,7 +30,7 @@ export default defineConfig({
       ],
       output: {
         preserveModules: true,
-        assetFileNames: 'annotorious-connectors-react.[ext]'
+        assetFileNames: 'annotorious-wires-react.[ext]'
       }
     },
     sourcemap: true
