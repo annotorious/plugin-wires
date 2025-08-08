@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Annotation, Annotator, ImageAnnotator, useAnnotator } from '@annotorious/react';
-import { W3CImageRelationFormat } from '@annotorious/plugin-connectors'; 
+import { W3CImageRelationFormat } from '@annotorious/plugin-wires'; 
 import { ConnectionPopup, ConnectorPlugin } from '../src';
 
 export const App = () => {

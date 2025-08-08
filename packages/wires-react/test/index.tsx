@@ -4,7 +4,7 @@ import { Annotorious } from '@annotorious/react';
 import { App } from './App';
 
 import '@annotorious/react/annotorious-react.css';
-import '@annotorious/plugin-connectors/annotorious-connectors.css';
+import '@annotorious/plugin-wires/annotorious-wires.css';
 
 const root = createRoot(document.getElementById('root') as Element);
 root.render(
