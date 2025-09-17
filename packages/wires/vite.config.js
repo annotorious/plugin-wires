@@ -19,7 +19,7 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       entry: './src/index.ts',
-      name: 'AnnotoriousConnectors',
+      name: 'AnnotoriousWires',
       formats: ['es', 'umd'],
       fileName: (format) => 
         format === 'umd' ? `annotorious-wires.js` : `annotorious-wires.es.js` 

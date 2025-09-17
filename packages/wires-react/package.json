@@ -1,16 +1,16 @@
 {
   "name": "@annotorious/plugin-wires-react",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "React bindings for the Annotorious wires plugin.",
   "author": "Rainer Simon",
   "license": "BSD-3-Clause",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/annotorious/annotorious-v3-extensions.git"
+    "url": "git+https://github.com/annotorious/plugin-wires.git"
   },
   "bugs": {
-    "url": "https://github.com/annotorious/annotorious-v3-extensions/issues"
+    "url": "https://github.com/annotorious/plugin-wires/issues"
   },
   "scripts": {
     "start": "vite",
@@ -29,21 +29,21 @@
     "./annotorious-wires-react.css": "./dist/annotorious-wires-react.css"
   },
   "devDependencies": {
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^4.7.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "typescript": "5.9.2",
-    "vite": "^5.4.19",
+    "vite": "^5.4.20",
     "vite-plugin-dts": "^4.5.4",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "peerDependencies": {
-    "@annotorious/react": "^3.6.9",
+    "@annotorious/react": "^3.7.6",
     "openseadragon": "^3.0.0 || ^4.0.0 || ^5.0.0",
-    "react": "16.8.0 || >=17.x || >=18.x || >=19.x",
-    "react-dom": "16.8.0 || >=17.x || >=18.x || >=19.x"
+    "react": ">=18.x || >=19.x",
+    "react-dom": ">=18.x || >=19.x"
   },
   "peerDependenciesMeta": {
     "openseadragon": {
@@ -51,9 +51,9 @@
     }
   },
   "dependencies": {
-    "@annotorious/plugin-wires": "0.6.2",
-    "@floating-ui/react": "^0.27.15",
-    "uuid": "^11.1.0"
+    "@annotorious/plugin-wires": "0.7.0",
+    "@floating-ui/react": "^0.27.16",
+    "uuid": "^13.0.0"
   },
   "sideEffects": false
 }
