@@ -1,2 +1,2 @@
-export * from './OSDConnectionPopup';
-export * from './OSDConnectorPlugin';
+export * from './OSDWirePopup';
+export * from './OSDWiresPlugin';

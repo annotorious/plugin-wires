@@ -1,7 +1,7 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { AnnotoriousImageAnnotator, AnnotoriousPlugin } from '@annotorious/react';
-import { ConnectorPluginInstance, mountPlugin as _mountPlugin } from '@annotorious/plugin-wires';
-import { ConnectorPluginProvider } from './WiresPluginProvider';
+import { WiresPluginInstance, mountPlugin as _mountPlugin } from '@annotorious/plugin-wires';
+import { WiresPluginProvider } from './WiresPluginProvider';
 
 interface WiresPluginProps {
 
@@ -13,7 +13,7 @@ interface WiresPluginProps {
 
 export const WiresPlugin = (props: WiresPluginProps) => {
 
-  const [instance, setInstance] = useState<ConnectorPluginInstance>();
+  const [instance, setInstance] = useState<WiresPluginInstance>();
 
   const mountPlugin = useCallback((anno: AnnotoriousImageAnnotator) => _mountPlugin(anno), []);
 
@@ -23,13 +23,13 @@ export const WiresPlugin = (props: WiresPluginProps) => {
   }, [instance, props.enabled]);
 
   return (
-    <ConnectorPluginProvider instance={instance}>
+    <WiresPluginProvider instance={instance}>
       <AnnotoriousPlugin 
         plugin={mountPlugin} 
-        onLoad={instance => setInstance(instance as ConnectorPluginInstance)} />
+        onLoad={instance => setInstance(instance as WiresPluginInstance)} />
 
       {props.children}
-    </ConnectorPluginProvider>
+    </WiresPluginProvider>
   )
 
 }

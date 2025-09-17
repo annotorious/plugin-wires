@@ -1,7 +1,7 @@
 export * from './components';
 export * from './hooks';
 export * from './openseadragon';
-export * from './WiresPopupProps';
+export * from './WirePopupProps';
 export * from './WiresPlugin';
 export * from './WiresPluginProvider';
 
@@ -10,12 +10,12 @@ import '@annotorious/plugin-wires/annotorious-wires.css';
 
 // Essential re-rexports from base package
 export type {
-  Connection,
   ConnectionAnnotation,
   ConnectionAnnotationTarget,
   Point,
   W3CRelationLinkAnnotation,
-  W3CRelationMetaAnnotation
+  W3CRelationMetaAnnotation,
+  Wire
 } from '@annotorious/plugin-wires';
 
 export {

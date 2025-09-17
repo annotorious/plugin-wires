@@ -7,11 +7,11 @@ import {
   OpenSeadragonViewer, 
   useAnnotator,
 } from '@annotorious/react';
-import { OSDWiresPopup, OSDWiresPlugin} from '../../src';
+import { OSDWirePopup, OSDWiresPlugin} from '../../src';
 import { DemoLabelPopup } from './DemoLabelPopup';
 
 import '@annotorious/openseadragon/annotorious-openseadragon.css';
-import '@annotorious/plugin-connectors/annotorious-connectors.css';
+import '@annotorious/plugin-wires/annotorious-wires.css';
 
 const IIIF_SAMPLE = {
   "@context" : "http://iiif.io/api/image/2/context.json",
@@ -102,12 +102,12 @@ export const App = () => {
 
         <OpenSeadragonViewer className="openseadragon" options={OSD_OPTIONS} />
         
-        <OSDConnectorPlugin 
+        <OSDWiresPlugin 
           enabled={relationsEnabled}>
 
-          <OSDConnectionPopup
+          <OSDWirePopup
             popup={props => (<DemoLabelPopup {...props} />)} />
-        </OSDConnectorPlugin>
+        </OSDWiresPlugin>
       </OpenSeadragonAnnotator>
     </div>
   )

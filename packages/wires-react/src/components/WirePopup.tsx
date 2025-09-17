@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { useAnnotator } from '@annotorious/react';
 import { ImageAnnotator } from '@annotorious/annotorious';
-import { useConnectionSelection, usePopupCallbacks } from '../hooks';
-import { ConnectionPopupProps } from '../WiresPopupProps';
+import { useWireSelection, usePopupCallbacks } from '../hooks';
+import { WirePopupProps } from '../WirePopupProps';
 import {
   useFloating,
   arrow,
@@ -14,19 +14,19 @@ import {
   FloatingArrow
 } from '@floating-ui/react';
 
-interface ConnectionPopupContainerProps {
+interface WirePopupContainerProps {
 
-  popup(props: ConnectionPopupProps): ReactNode;
+  popup(props: WirePopupProps): ReactNode;
 
 }
 
-export const ConnectionPopup = (props: ConnectionPopupContainerProps) => {
+export const WirePopup = (props: WirePopupContainerProps) => {
 
   const arrowRef = useRef(null);
 
   const anno = useAnnotator<ImageAnnotator>();
 
-  const { annotation, midpoint } = useConnectionSelection();
+  const { annotation, midpoint } = useWireSelection();
 
   const [isOpen, setIsOpen] = useState(false);
 

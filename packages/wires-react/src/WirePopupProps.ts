@@ -1,7 +1,7 @@
 import { AnnotationBody } from '@annotorious/react';
 import { ConnectionAnnotation } from '@annotorious/plugin-wires';
 
-export interface WiresPopupProps {
+export interface WirePopupProps {
 
   annotation: ConnectionAnnotation;
 

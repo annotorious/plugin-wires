@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { ImageAnnotation, useSelection } from '@annotorious/react';
 import { ConnectionAnnotation, isConnectionAnnotation, Point } from '@annotorious/plugin-wires';
-import { useConnectorPlugin } from './useConnectorPlugin';
+import { useWiresPlugin } from './useWiresPlugin';
 
-export interface ConnectionSelection {
+export interface WireSelection {
 
   annotation?: ConnectionAnnotation;
 
@@ -15,13 +15,13 @@ export interface ConnectionSelection {
 
 }
 
-export const useConnectionSelection = () => {
+export const useWireSelection = () => {
 
-  const plugin = useConnectorPlugin();
+  const plugin = useWiresPlugin();
 
   const selection = useSelection<ImageAnnotation | ConnectionAnnotation>();
 
-  const connectionSelection: ConnectionSelection = useMemo(() => {
+  const connectionSelection: WireSelection = useMemo(() => {
     if (!plugin) return {};
 
     const { selected, event } = selection;

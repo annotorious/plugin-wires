@@ -1,4 +1,4 @@
 export * from './useConnections';
-export * from './useConnectionSelection';
-export * from './useConnectorPlugin';
+export * from './useWireSelection';
+export * from './useWiresPlugin';
 export * from './usePopupCallbacks';

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Annotation, Annotator, ImageAnnotator, useAnnotator } from '@annotorious/react';
 import { W3CImageRelationFormat } from '@annotorious/plugin-wires'; 
-import { ConnectionPopup, ConnectorPlugin } from '../src';
+import { WirePopup, WiresPlugin } from '../src';
 
 export const App = () => {
 
@@ -36,17 +36,17 @@ export const App = () => {
         <img src="640px-Hallstatt.jpg" />
       </ImageAnnotator>
 
-      <ConnectorPlugin 
+      <WiresPlugin 
         enabled={mode === 'RELATIONS'}>
 
-        <ConnectionPopup 
+        <WirePopup 
           popup={props => (
             <div>
               <button onClick={() => props.onCreateBody({ purpose: 'testing', value: 'test'})}>Add Tag</button>
             </div>
           )} />
 
-      </ConnectorPlugin>
+      </WiresPlugin>
     </div>
   )
 

@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import OpenSeadragon from 'openseadragon';
 import { AnnotoriousOpenSeadragonAnnotator, useAnnotator, useViewer } from '@annotorious/react';
-import { useConnectionSelection, usePopupCallbacks } from '../hooks';
-import { ConnectionPopupProps } from '../WiresPopupProps';
+import { useWireSelection, usePopupCallbacks } from '../hooks';
+import { WirePopupProps } from '../WirePopupProps';
 import {
   useFloating,
   arrow,
@@ -14,13 +14,13 @@ import {
   FloatingArrow
 } from '@floating-ui/react';
 
-interface OSDConnectionPopupProps {
+interface OSDWirePopupProps {
 
-  popup(props: ConnectionPopupProps): ReactNode;
+  popup(props: WirePopupProps): ReactNode;
 
 }
 
-export const OSDConnectionPopup = (props: OSDConnectionPopupProps) => {
+export const OSDWirePopup = (props: OSDWirePopupProps) => {
 
   const anno = useAnnotator<AnnotoriousOpenSeadragonAnnotator>();
 
@@ -30,7 +30,7 @@ export const OSDConnectionPopup = (props: OSDConnectionPopupProps) => {
 
   const arrowRef = useRef(null);
 
-  const { annotation, midpoint } = useConnectionSelection();
+  const { annotation, midpoint } = useWireSelection();
 
   const { onCreateBody, onDeleteBody, onUpdateBody } = usePopupCallbacks(annotation);
 

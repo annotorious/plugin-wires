@@ -1,1 +1,1 @@
-export * from './ConnectionPopup';
+export * from './WirePopup';

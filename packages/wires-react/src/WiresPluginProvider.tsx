@@ -1,26 +1,26 @@
 import { ReactNode, createContext } from 'react';
-import { ConnectorPluginInstance } from '@annotorious/plugin-wires';
+import { WiresPluginInstance } from '@annotorious/plugin-wires';
 
-interface ConnectorPluginProviderProps {
+interface WiresPluginProviderProps {
 
   children: ReactNode;
 
-  instance?: ConnectorPluginInstance;
+  instance?: WiresPluginInstance;
 
 }
 
-export const ConnectorPluginContext = createContext({
+export const WiresPluginContext = createContext({
 
   instance: undefined,
 
 });
 
-export const ConnectorPluginProvider = (props: ConnectorPluginProviderProps) => {
+export const WiresPluginProvider = (props: WiresPluginProviderProps) => {
 
   return (
-    <ConnectorPluginContext.Provider value={{ instance: props.instance }}>
+    <WiresPluginContext.Provider value={{ instance: props.instance }}>
       {props.children}
-    </ConnectorPluginContext.Provider>
+    </WiresPluginContext.Provider>
   )
 
 }
