@@ -1,3 +1,3 @@
 export * from './model';
-export * from './connectorsPlugin';
-export * from './osdConnectorsPlugin';
+export * from './wiresPlugin';
+export * from './osdWiresPlugin';

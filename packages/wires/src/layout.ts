@@ -1,16 +1,17 @@
-import { ShapeType, type ImageAnnotation, type PolygonGeometry } from '@annotorious/annotorious';
+import { ShapeType } from '@annotorious/annotorious';
+import type { ImageAnnotation, PolygonGeometry } from '@annotorious/annotorious';
 import { roundCorners } from 'svg-round-corners';
 import type { 
-  Connection, 
-  ConnectionHandle, 
   Direction, 
-  FloatingConnectionHandle, 
+  FloatingWireHandle, 
   Path, 
-  PinnedConnectionHandle,
-  Point
+  PinnedWireHandle,
+  Point,
+  Wire, 
+  WireHandle
 } from './model';
 
-const isFloatingConnectionHandle = (arg: any): arg is FloatingConnectionHandle => 
+const isFloatingWireHandle = (arg: any): arg is FloatingWireHandle => 
   arg.point !== undefined && 
   typeof arg.point.x === 'number' && 
   typeof arg.point.y === 'number';
@@ -24,7 +25,7 @@ const invert = (dir: Direction): Direction =>
 /** 
  * Returns all handles for this image annotation.
  */
-const getHandles = (annotation: ImageAnnotation): PinnedConnectionHandle[] => {
+const getHandles = (annotation: ImageAnnotation): PinnedWireHandle[] => {
   if (annotation.target.selector.type === ShapeType.POLYGON) {
     const { minX, minY, maxX, maxY } = annotation.target.selector.geometry.bounds;
 
@@ -71,7 +72,7 @@ const getHandles = (annotation: ImageAnnotation): PinnedConnectionHandle[] => {
  * Enumerate possible I-, L- and S-path layouts between two handles. (Reminder:
  * a handle has an x/y position and a starting direction.)
  */
-const enumeratePathLayouts = (start: PinnedConnectionHandle, end: ConnectionHandle) => {
+const enumeratePathLayouts = (start: PinnedWireHandle, end: WireHandle) => {
   const dx = end.point.x - start.point.x;
   const dy = end.point.y - start.point.y;
 
@@ -106,26 +107,26 @@ const enumeratePathLayouts = (start: PinnedConnectionHandle, end: ConnectionHand
  * Enumerates all possible I-, L- and S-path layouts between all handles on 
  * the given image annotations.
  */
-const enumerateConnections = (source: ImageAnnotation, target: FloatingConnectionHandle | ImageAnnotation) => {
+const enumerateWires = (source: ImageAnnotation, target: FloatingWireHandle | ImageAnnotation) => {
   const sourceHandles = getHandles(source);
-  const targetHandles: ConnectionHandle[] = isFloatingConnectionHandle(target) ? [target] : getHandles(target);
+  const targetHandles: WireHandle[] = isFloatingWireHandle(target) ? [target] : getHandles(target);
 
-  const connections: Connection[] = [];
+  const wires: Wire[] = [];
 
   sourceHandles.forEach(start => {
     targetHandles.forEach(end => {
       const layouts = enumeratePathLayouts(start, end);
-      connections.push(...layouts.map(layout => ({ start, layout, end })));
+      wires.push(...layouts.map(layout => ({ start, layout, end })));
     });
   });
 
-  return connections;
+  return wires;
 }
 
-export const getConnection = (source: ImageAnnotation, target: FloatingConnectionHandle | ImageAnnotation) => {
-  const connections = enumerateConnections(source, target);
+export const getWire = (source: ImageAnnotation, target: FloatingWireHandle | ImageAnnotation) => {
+  const wires = enumerateWires(source, target);
 
-  connections.sort((a, b) => {
+  wires.sort((a, b) => {
     const lengthA = getLength(a);
     const lengthB = getLength(b);
 
@@ -135,19 +136,19 @@ export const getConnection = (source: ImageAnnotation, target: FloatingConnectio
     return countCorners(a) - countCorners(b);
   });
 
-  return connections[0];
+  return wires[0];
 }
 
-const countCorners = (connection: Connection) => 
-  connection.layout.split('-').length - 1;
+const countCorners = (wire: Wire) => 
+  wire.layout.split('-').length - 1;
 
-const getLength = (connection: Connection) => {
-  const dx = connection.end.point.x - connection.start.point.x;
-  const dy = connection.end.point.y - connection.start.point.y;
+const getLength = (wire: Wire) => {
+  const dx = wire.end.point.x - wire.start.point.x;
+  const dy = wire.end.point.y - wire.start.point.y;
   return Math.abs(dx) + Math.abs(dy);
 }
 
-export const computePath = (connection: Connection, r?: number): Path => {
+export const computePath = (connection: Wire, r?: number): Path => {
   const segments = connection.layout.split('-') as Direction[];
 
   const isS = segments.length === 3;

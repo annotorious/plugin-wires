@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ConnectorPluginInstance } from '@annotorious/plugin-wires';
-import { ConnectorPluginContext } from '../ConnectorPluginProvider';
+import { ConnectorPluginContext } from '../WiresPluginProvider';
 
 export const useConnectorPlugin = () => {
   const { instance } = useContext(ConnectorPluginContext);

@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import OpenSeadragon from 'openseadragon';
 import { AnnotoriousOpenSeadragonAnnotator, useAnnotator, useViewer } from '@annotorious/react';
 import { useConnectionSelection, usePopupCallbacks } from '../hooks';
-import { ConnectionPopupProps } from '../ConnectionPopupProps';
+import { ConnectionPopupProps } from '../WiresPopupProps';
 import {
   useFloating,
   arrow,

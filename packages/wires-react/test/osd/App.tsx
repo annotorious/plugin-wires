@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { W3CImageRelationFormat } from '@annotorious/plugin-connectors'; 
+import { useEffect, useState } from 'react';
+import { W3CImageRelationFormat } from '@annotorious/plugin-wires'; 
 import { 
   AnnotoriousOpenSeadragonAnnotator, 
   DrawingStyle, 
@@ -7,7 +7,7 @@ import {
   OpenSeadragonViewer, 
   useAnnotator,
 } from '@annotorious/react';
-import { OSDConnectionPopup, OSDConnectorPlugin} from '../../src';
+import { OSDWiresPopup, OSDWiresPlugin} from '../../src';
 import { DemoLabelPopup } from './DemoLabelPopup';
 
 import '@annotorious/openseadragon/annotorious-openseadragon.css';

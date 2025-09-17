@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import { useAnnotator } from '@annotorious/react';
 import { ImageAnnotator } from '@annotorious/annotorious';
 import { useConnectionSelection, usePopupCallbacks } from '../hooks';
-import { ConnectionPopupProps } from '../ConnectionPopupProps';
+import { ConnectionPopupProps } from '../WiresPopupProps';
 import {
   useFloating,
   arrow,

@@ -1,9 +1,9 @@
 export * from './components';
 export * from './hooks';
 export * from './openseadragon';
-export * from './ConnectionPopupProps';
-export * from './ConnectorPlugin';
-export * from './ConnectorPluginProvider';
+export * from './WiresPopupProps';
+export * from './WiresPlugin';
+export * from './WiresPluginProvider';
 
 // Re-publish the stylesheet
 import '@annotorious/plugin-wires/annotorious-wires.css';
