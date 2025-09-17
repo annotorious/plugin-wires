@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { W3CImageRelationFormat } from '@annotorious/plugin-wires'; 
 import { 
   AnnotoriousOpenSeadragonAnnotator, 
-  DrawingStyle, 
+  DrawingStyle,
   OpenSeadragonAnnotator, 
   OpenSeadragonViewer, 
   useAnnotator,
 } from '@annotorious/react';
-import { OSDWirePopup, OSDWiresPlugin} from '../../src';
+import { OpenSeadragonAnnotationPopup, OSDWirePopup, OSDWiresPlugin} from '../../src';
 import { DemoLabelPopup } from './DemoLabelPopup';
 
 import '@annotorious/openseadragon/annotorious-openseadragon.css';
@@ -101,10 +101,14 @@ export const App = () => {
         style={style}>
 
         <OpenSeadragonViewer className="openseadragon" options={OSD_OPTIONS} />
+
+        <OpenSeadragonAnnotationPopup
+          popup={() => (
+            <div>Hello World</div>
+          )} />
         
         <OSDWiresPlugin 
           enabled={relationsEnabled}>
-
           <OSDWirePopup
             popup={props => (<DemoLabelPopup {...props} />)} />
         </OSDWiresPlugin>

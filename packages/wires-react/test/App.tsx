@@ -38,14 +38,12 @@ export const App = () => {
 
       <WiresPlugin 
         enabled={mode === 'RELATIONS'}>
-
         <WirePopup 
           popup={props => (
             <div>
               <button onClick={() => props.onCreateBody({ purpose: 'testing', value: 'test'})}>Add Tag</button>
             </div>
           )} />
-
       </WiresPlugin>
     </div>
   )
