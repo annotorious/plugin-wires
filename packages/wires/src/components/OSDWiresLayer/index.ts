@@ -1,0 +1,1 @@
+export { default as OSDWiresLayer } from './OSDWiresLayer.svelte';
