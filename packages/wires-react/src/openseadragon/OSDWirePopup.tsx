@@ -11,10 +11,15 @@ import {
   autoUpdate,
   flip,
   offset,
-  FloatingArrow
+  FloatingArrow,
+  FloatingArrowProps
 } from '@floating-ui/react';
 
 interface OSDWirePopupProps {
+
+  arrow?: boolean;
+
+  arrowProps?: Omit<FloatingArrowProps, 'context' | 'ref'> & { padding?: number };
 
   popup(props: WirePopupProps): ReactNode;
 
@@ -48,7 +53,7 @@ export const OSDWirePopup = (props: OSDWirePopupProps) => {
       }),
       arrow({
         element: arrowRef,
-        padding: 5
+        padding: props.arrowProps?.padding ||  5
       })
     ],
     whileElementsMounted: autoUpdate
@@ -105,9 +110,11 @@ export const OSDWirePopup = (props: OSDWirePopupProps) => {
       ref={refs.setFloating}
       style={floatingStyles}>
 
-      <FloatingArrow 
-        ref={arrowRef} 
-        context={context} />
+      {props.arrow && (
+        <FloatingArrow 
+          ref={arrowRef} 
+          context={context} />
+      )}
 
       {props.popup({
         annotation,
