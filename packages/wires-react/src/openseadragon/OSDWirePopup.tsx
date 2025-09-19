@@ -101,7 +101,7 @@ export const OSDWirePopup = (props: OSDWirePopupProps) => {
 
   return isOpen && annotation && (
     <div 
-      className="a9s-connection-popup a9s-openseadragon-connection-popup"
+      className="a9s-wire-popup a9s-openseadragon-wire-popup"
       ref={refs.setFloating}
       style={floatingStyles}>
 

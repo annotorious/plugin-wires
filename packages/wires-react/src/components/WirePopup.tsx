@@ -96,7 +96,7 @@ export const WirePopup = (props: WirePopupContainerProps) => {
 
   return isOpen && annotation && (
     <div 
-      className="a9s-connection-popup"
+      className="a9s-wire-popup"
       ref={refs.setFloating}
       style={floatingStyles}>
 
