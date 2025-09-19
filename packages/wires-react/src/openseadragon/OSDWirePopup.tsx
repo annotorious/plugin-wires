@@ -113,7 +113,8 @@ export const OSDWirePopup = (props: OSDWirePopupProps) => {
       {props.arrow && (
         <FloatingArrow 
           ref={arrowRef} 
-          context={context} />
+          context={context} 
+          {...(props.arrowProps || {})} />
       )}
 
       {props.popup({
