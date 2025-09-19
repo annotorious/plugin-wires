@@ -10,4 +10,5 @@ export interface WirePopupProps {
   onDeleteBody(id: string): void;
 
   onUpdateBody(current: Partial<AnnotationBody>, next: Partial<AnnotationBody>): void;
+  
 }
