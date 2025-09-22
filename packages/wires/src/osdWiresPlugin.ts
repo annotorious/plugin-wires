@@ -36,7 +36,8 @@ export const mountOSDPlugin = (
     // TODO this should actually revert to the last
     // action set by the host application. (But how?)
     if (enabled) {
-      anno.setUserSelectAction(UserSelectAction.NONE);
+      anno.cancelSelected();
+      anno.setUserSelectAction(UserSelectAction.SELECT);
     } else {
       anno.setUserSelectAction(UserSelectAction.EDIT);
     }
