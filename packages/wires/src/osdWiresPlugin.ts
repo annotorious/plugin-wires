@@ -31,15 +31,15 @@ export const mountOSDPlugin = (
 
   const setEnabled = (enabled: boolean) => {
     isEnabled = enabled;
-
     connectorLayer.$set({ enabled: isEnabled });
 
     // TODO this should actually revert to the last
     // action set by the host application. (But how?)
-    if (enabled)
-      anno.setUserSelectAction(UserSelectAction.SELECT);
-    else 
+    if (enabled) {
+      anno.setUserSelectAction(UserSelectAction.NONE);
+    } else {
       anno.setUserSelectAction(UserSelectAction.EDIT);
+    }
   }
 
   const unmount = () => {

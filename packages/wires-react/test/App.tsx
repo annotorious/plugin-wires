@@ -7,7 +7,14 @@ export const App = () => {
 
   const [mode, setMode] = useState<'ANNOTATE' | 'RELATIONS'>('ANNOTATE');
 
+  const [enabled, setEnabled] = useState(false);
+
   const anno = useAnnotator<Annotator<Annotation, Annotation>>();
+
+  useEffect(() => {
+    if (mode === 'RELATIONS')
+      setEnabled(true);
+  }, [mode]);
 
   useEffect(() => {
     if (!anno) return;
@@ -17,8 +24,12 @@ export const App = () => {
 
     anno.loadAnnotations('annotations.json');
 
+    const onCreate = () => setEnabled(false);
+    anno.on('createAnnotation', onCreate);
+
     return () => {
       anno.off('updateAnnotation', onUpdate);
+      anno.off('createAnnotation', onCreate);
     }
   }, [anno]);
 
@@ -37,7 +48,7 @@ export const App = () => {
       </ImageAnnotator>
 
       <WiresPlugin 
-        enabled={mode === 'RELATIONS'}>
+        enabled={enabled}>
         <WirePopup 
           popup={props => (
             <div>

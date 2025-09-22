@@ -23,13 +23,15 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
+        '@annotorious/annotorious', 
+        '@annotorious/openseadragon', 
+        'openseadragon',
         '@annotorious/react',
         'openseadragon',
         'react',
         'react-dom'
       ],
       output: {
-        preserveModules: true,
         assetFileNames: 'annotorious-wires-react.[ext]'
       }
     },

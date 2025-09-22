@@ -69,9 +69,15 @@ export const App = () => {
 
     anno.loadAnnotations('annotations.json');
 
-    anno.on('createAnnotation', a => console.log(a));
-    anno.on('updateAnnotation', a => console.log(a));
-    anno.on('selectionChanged', a => console.log(a));
+    const onCreate = () => setRelationsEnabled(false);
+    anno.on('createAnnotation', onCreate);
+
+    // anno.on('updateAnnotation', a => console.log(a));
+    // anno.on('selectionChanged', a => console.log(a));
+
+    return () => {
+      anno.off('createAnnotation', onCreate);
+    }
   }, [anno]);
 
   const toggleMode = () => setMode(mode => 
