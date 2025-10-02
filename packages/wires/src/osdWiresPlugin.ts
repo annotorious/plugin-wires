@@ -41,14 +41,16 @@ export const mountOSDPlugin = (
     }
   }
 
+  mountOSDWiresLayer();
+
   /** API **/
 
   const getMidpoint = (id: string) =>
-    connectorLayer.getMidpoint(id);
+    connectorLayer?.getMidpoint(id);
 
   const setEnabled = (enabled: boolean) => {
     isEnabled = enabled;
-    connectorLayer.$set({ enabled: isEnabled });
+    connectorLayer?.$set({ enabled: isEnabled });
 
     // TODO this should actually revert to the last
     // action set by the host application. (But how?)
@@ -61,7 +63,7 @@ export const mountOSDPlugin = (
   }
 
   const setVisibility = (visibility?: WiresVisibility) => {
-    connectorLayer.$set({ opts: { ...opts, showWires: visibility }});
+    connectorLayer?.$set({ opts: { ...opts, showWires: visibility }});
   }
 
   const unmount = () => {

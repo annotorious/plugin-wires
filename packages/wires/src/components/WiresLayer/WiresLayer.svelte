@@ -160,7 +160,7 @@
 
       return connections.filter(c => {
         const { from, to } = c.target.selector;
-        return activeIds.includes(from) || activeIds.includes(to);
+        return activeIds.includes(from) || activeIds.includes(to) || activeIds.includes(c.id);
       });
     }
   }
