@@ -46,7 +46,7 @@ export const mountOSDPlugin = (
     }
   }
 
-  const setVisibility = (visibility: WiresVisibility) => {
+  const setVisibility = (visibility?: WiresVisibility) => {
     connectorLayer.$set({ opts: { ...opts, showWires: visibility }});
   }
 

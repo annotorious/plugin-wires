@@ -10,7 +10,7 @@ export interface WiresPluginInstance {
 
   setEnabled(enabled: boolean): void;
 
-  setVisibility(visibility: WiresVisibility): void;
+  setVisibility(visibility?: WiresVisibility): void;
 
   unmount(): void;
 
@@ -42,7 +42,7 @@ export const mountPlugin = (anno: ImageAnnotator<ImageAnnotation>, opts: WiresPl
     connectorLayer.$set({ enabled: isEnabled });
   }
 
-  const setVisibility = (visibility: WiresVisibility) => {
+  const setVisibility = (visibility?: WiresVisibility) => {
     connectorLayer.$set({ opts: { ...opts, showWires: visibility }});
   }
 
