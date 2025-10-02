@@ -4,10 +4,12 @@ import { UserSelectAction } from '@annotorious/openseadragon';
 import type { WiresPluginInstance } from './wiresPlugin';
 import { OSDWiresLayer } from './components/OSDWiresLayer';
 import { createConnectionGraph } from './state';
+import type { WiresPluginOpts, WiresVisibility } from './WiresPluginOpts';
 
 export const mountOSDPlugin = (
   anno: ImageAnnotator<ImageAnnotation>, 
-  viewer: OpenSeadragon.Viewer
+  viewer: OpenSeadragon.Viewer,
+  opts: WiresPluginOpts = {}
 ): WiresPluginInstance  => {
 
   const graph = createConnectionGraph(anno.state.store);
@@ -17,6 +19,7 @@ export const mountOSDPlugin = (
   const connectorLayer = new OSDWiresLayer({
     target: viewer.element.querySelector('.openseadragon-canvas')!,
     props: {
+      opts,
       enabled: isEnabled,
       graph,
       state: anno.state as ImageAnnotatorState<ImageAnnotation>,
@@ -43,6 +46,10 @@ export const mountOSDPlugin = (
     }
   }
 
+  const setVisibility = (visibility: WiresVisibility) => {
+    connectorLayer.$set({ opts: { ...opts, showWires: visibility }});
+  }
+
   const unmount = () => {
     graph.destroy();
   }
@@ -50,6 +57,7 @@ export const mountOSDPlugin = (
   return { 
     getMidpoint,
     setEnabled,
+    setVisibility,
     unmount
   }
 

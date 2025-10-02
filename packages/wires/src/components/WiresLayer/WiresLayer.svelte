@@ -10,10 +10,12 @@
   import { Emphasis } from './emphasis';
   import Connector from './Wire.svelte';
   import RubberbandConnector from './RubberbandWire.svelte';
+  import type { WiresPluginOpts } from '../../WiresPluginOpts';
 
   const dispatch = createEventDispatcher<{ create: ConnectionAnnotation }>();
 
   /** Props */
+  export let opts: WiresPluginOpts;
   export let enabled: boolean;
   export let graph: ConnectionGraph;
   export let layerTransform: string | undefined = undefined;
@@ -49,6 +51,8 @@
     handle !== undefined && 'direction' in handle;
 
   const onPointerDown = (evt: PointerEvent) => {
+    if (!enabled) return;
+
     selection.clear();
 
     if (!source && hovered) {
@@ -90,30 +94,35 @@
         ? pointerTransform({ x: evt.offsetX, y: evt.offsetY })
         : getSVGPoint(evt, svgEl);
 
-    const h = store.getAt(pt.x, pt.y);
+    hovered = store.getAt(pt.x, pt.y);
 
-    if (source) {
+    if (enabled && source) {
       // Source defined - pick target
-      if (h && !graph.isConnected(source.id, h.id)) {
+      if (hovered && !graph.isConnected(source.id, hovered.id)) {
         // A target shape that's not yet connected - pin the
         // connection and hover emphasise the target shape
-        floatingWire = getWire(source, h);
-        hovered = h;
+        floatingWire = getWire(source, hovered);
       } else {
         // No hovered shape, or already connected
         floatingWire = getWire(source, { point: pt });
         hovered = undefined;
       }
-    } else {
-      // No source shape - hover the current, if any
-      hovered = h;
     }
   }
 
   onMount(() => {
+    const annotationLayer = 
+      svgEl.parentElement?.querySelector('.a9s-gl-canvas') as HTMLElement ||
+      svgEl.parentElement?.querySelector('.a9s-annotationlayer') as HTMLElement;
+
+    if (!annotationLayer)
+      throw new Error('No Annotorious annotation layer found');
+    
+    annotationLayer.addEventListener('pointermove', onPointerMove);
+    annotationLayer.addEventListener('pointerdown', onPointerDown);
+
     const onChange = (event: StoreChangeEvent<Annotation>) => {
       const { created, deleted } = event.changes;
-
 
       const addedConnections = 
         (created || []).filter(isConnectionAnnotation);
@@ -127,21 +136,40 @@
     store.observe(onChange);
 
     return () => {
+      annotationLayer.removeEventListener('pointermove', onPointerMove);
+      annotationLayer.removeEventListener('pointerdown', onPointerDown);
+
       store.unobserve(onChange);
     }
   });
 
   // Shorthand
   $: isSelected = (id: string) => $selection.selected.some(s => s.id === id);
+
+  // Test if this annotation should be shown with wires attached
+  $: getVisibleConnections = () => {
+    if ((opts.showWires || 'ALWAYS') === 'ALWAYS') {
+      return connections;
+    } else {
+      const selectedIds = $selection.selected.map(s => s.id);
+
+      const activeIds: string[] = 
+        opts.showWires === 'HOVER_ONLY' ? (hovered ? [hovered.id] : []) :
+        opts.showWires === 'SELECTED_ONLY' ? selectedIds :
+        [...selectedIds, hovered?.id!].filter(Boolean);
+
+      return connections.filter(c => {
+        const { from, to } = c.target.selector;
+        return activeIds.includes(from) || activeIds.includes(to);
+      });
+    }
+  }
 </script>
 
 <svg 
   bind:this={svgEl}
   class="a9s-connector-layer"
-  class:enabled={enabled}
-  class:hover={hovered}
-  on:pointermove={onPointerMove}
-  on:pointerdown={onPointerDown}>
+  class:hover={hovered}>
   <g class="a9s-connectors-layer" transform={layerTransform}>
     <g class="a9s-connectors-shape-emphasis">
       {#if enabled}
@@ -160,7 +188,7 @@
     </g>
 
     <g class="a9s-connectors">
-      {#each connections as connection}
+      {#each getVisibleConnections() as connection}
         <Connector
           bind:this={connectionRefs[connection.id]}
           annotation={connection}
@@ -184,14 +212,10 @@
   svg {
     height: 100%;
     left: 0px;
+    pointer-events: none;
     position: absolute;
     top: 0px;
-    pointer-events: none;
     width: 100%;
-  }
-
-  svg.enabled {
-    pointer-events: all;
   }
 
   svg.hover {

@@ -64,7 +64,7 @@
           selected = s;
         });
 
-        const connectors = mountPlugin(anno);
+        const connectors = mountPlugin(anno, { showWires: 'HOVER_ONLY' });
 
         var relationsBtn = document.getElementById('relations');
         relationsBtn.addEventListener('click', function() {

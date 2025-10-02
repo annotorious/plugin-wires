@@ -100,7 +100,7 @@
         anno.on('selectionChanged', selected => console.log('selection', selected));
         anno.on('updateAnnotation', (a, previous) => console.log('updated', previous, 'with', a));
         
-        const connectors = mountOSDPlugin(anno, viewer);
+        const connectors = mountOSDPlugin(anno, viewer, { showWires: 'HOVER_OR_SELECT' }); // { showWires: 'HOVER_ONLY' });
 
         anno.loadAnnotations('annotations.json');
 

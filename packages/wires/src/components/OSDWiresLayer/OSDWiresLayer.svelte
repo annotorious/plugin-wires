@@ -6,8 +6,10 @@
   import OSDSVGLayer from './OSDSVGLayer.svelte';
   import type { Point } from '../../model';
   import type { ConnectionGraph } from '../../state';
+  import type { WiresPluginOpts } from '../../WiresPluginOpts';
 
   /** Props **/
+  export let opts: WiresPluginOpts;
   export let enabled: boolean;
   export let graph: ConnectionGraph;
   export let state: ImageAnnotatorState<ImageAnnotation>;
@@ -30,6 +32,7 @@
 
   <WiresLayer 
     bind:this={connectorLayer}
+    opts={opts}
     enabled={enabled}
     graph={graph}
     scale={scale}

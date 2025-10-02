@@ -2,6 +2,7 @@ import type { ImageAnnotation, ImageAnnotator, ImageAnnotatorState } from '@anno
 import type { Point } from './model';
 import { WiresLayer } from './components/WiresLayer';
 import { createConnectionGraph } from './state';
+import type { WiresPluginOpts, WiresVisibility } from './WiresPluginOpts';
 
 export interface WiresPluginInstance {
 
@@ -9,11 +10,13 @@ export interface WiresPluginInstance {
 
   setEnabled(enabled: boolean): void;
 
+  setVisibility(visibility: WiresVisibility): void;
+
   unmount(): void;
 
 }
 
-export const mountPlugin = (anno: ImageAnnotator<ImageAnnotation>): WiresPluginInstance => {
+export const mountPlugin = (anno: ImageAnnotator<ImageAnnotation>, opts: WiresPluginOpts = {}): WiresPluginInstance => {
 
   let isEnabled = false;
 
@@ -22,6 +25,7 @@ export const mountPlugin = (anno: ImageAnnotator<ImageAnnotation>): WiresPluginI
   const connectorLayer = new WiresLayer({
     target: anno.element,
     props: {
+      opts,
       enabled: isEnabled,
       graph,
       state: anno.state as ImageAnnotatorState<ImageAnnotation>
@@ -38,6 +42,10 @@ export const mountPlugin = (anno: ImageAnnotator<ImageAnnotation>): WiresPluginI
     connectorLayer.$set({ enabled: isEnabled });
   }
 
+  const setVisibility = (visibility: WiresVisibility) => {
+    connectorLayer.$set({ opts: { ...opts, showWires: visibility }});
+  }
+
   const unmount = () => {
     graph.destroy();
   }
@@ -45,6 +53,7 @@ export const mountPlugin = (anno: ImageAnnotator<ImageAnnotation>): WiresPluginI
   return { 
     getMidpoint,
     setEnabled,
+    setVisibility,
     unmount
   }
 
