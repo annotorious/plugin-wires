@@ -15,7 +15,8 @@ export type {
   Point,
   W3CRelationLinkAnnotation,
   W3CRelationMetaAnnotation,
-  Wire
+  Wire,
+  WiresVisibility
 } from '@annotorious/plugin-wires';
 
 export {
