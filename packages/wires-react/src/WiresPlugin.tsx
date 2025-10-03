@@ -1,15 +1,13 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { AnnotoriousImageAnnotator, AnnotoriousPlugin } from '@annotorious/react';
-import { WiresPluginInstance, WiresVisibility, mountPlugin as _mountPlugin } from '@annotorious/plugin-wires';
+import { WiresPluginInstance, WiresPluginOpts, mountPlugin as _mountPlugin } from '@annotorious/plugin-wires';
 import { WiresPluginProvider } from './WiresPluginProvider';
 
-interface WiresPluginProps {
+interface WiresPluginProps extends WiresPluginOpts {
 
   children?: ReactNode;
 
   enabled?: boolean;
-
-  visibility?: WiresVisibility;
 
 }
 
@@ -17,9 +15,10 @@ export const WiresPlugin = (props: WiresPluginProps) => {
 
   const [instance, setInstance] = useState<WiresPluginInstance>();
 
-  const mountPlugin = useCallback((anno: AnnotoriousImageAnnotator) => _mountPlugin(anno, {
-    showWires: props.visibility
-  }), []);
+  const mountPlugin = useCallback((anno: AnnotoriousImageAnnotator) => {
+    const { children: _, enabled: __, ...opts } = props;
+    _mountPlugin(anno, opts);
+  }, []);
 
   useEffect(() => {
     if (instance)
@@ -28,8 +27,8 @@ export const WiresPlugin = (props: WiresPluginProps) => {
 
   useEffect(() => {
     if (instance)
-      instance.setVisibility(props.visibility);
-  }, [instance, props.visibility]);
+      instance.setVisibility(props.showWires);
+  }, [instance, props.showWires]);
 
   return (
     <WiresPluginProvider instance={instance}>

@@ -23,7 +23,7 @@ export const mountOSDPlugin = (
   // plugin! Ensure that everything is properly set up before we init the
   // wires layer, because it will attach listeners to the annotation layer!
   const mountOSDWiresLayer = (retries = 10) => {
-    const isReady = Boolean(viewer.element?.querySelector('.a9s-gl-canvas'));
+    const isReady = Boolean(viewer?.element?.querySelector('.a9s-gl-canvas'));
     if (isReady) {
       connectorLayer = new OSDWiresLayer({
         target: viewer.element.querySelector('.openseadragon-canvas')!,

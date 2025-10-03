@@ -1,18 +1,16 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { AnnotoriousPlugin, useViewer } from '@annotorious/react';
-import { mountOSDPlugin, WiresVisibility } from '@annotorious/plugin-wires';
+import { mountOSDPlugin, WiresPluginOpts } from '@annotorious/plugin-wires';
 import { ImageAnnotator } from '@annotorious/annotorious';
 import { WiresPluginProvider } from 'src/WiresPluginProvider';
 
 type WiresPluginInstance = ReturnType<typeof mountOSDPlugin>;
 
-interface OSDWiresPluginProps {
+interface OSDWiresPluginProps extends WiresPluginOpts {
 
   children?: ReactNode;
 
   enabled?: boolean;
-
-  visibility?: WiresVisibility;
 
 }
 
@@ -22,9 +20,11 @@ export const OSDWiresPlugin = (props: OSDWiresPluginProps) => {
 
   const [instance, setInstance] = useState<WiresPluginInstance>();
 
-  const mountPlugin = useCallback((anno: ImageAnnotator) => mountOSDPlugin(anno, viewer, {
-    showWires: props.visibility
-  }), [viewer]);
+  const mountPlugin = useCallback((anno: ImageAnnotator) => {
+    if (!viewer) return;
+    const { children: _, enabled: __, ...opts } = props;
+    return mountOSDPlugin(anno, viewer, opts);
+  }, [viewer]);
 
   useEffect(() => {
     if (instance)
@@ -33,8 +33,8 @@ export const OSDWiresPlugin = (props: OSDWiresPluginProps) => {
 
   useEffect(() => {
     if (instance)
-      instance.setVisibility(props.visibility);
-  }, [instance, props.visibility]);
+      instance.setVisibility(props.showWires);
+  }, [instance, props.showWires]);
 
   return (
     <WiresPluginProvider instance={instance}>

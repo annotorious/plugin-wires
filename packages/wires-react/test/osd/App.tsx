@@ -11,7 +11,6 @@ import { OpenSeadragonAnnotationPopup, OSDWirePopup, OSDWiresPlugin} from '../..
 import { DemoLabelPopup } from './DemoLabelPopup';
 
 import '@annotorious/openseadragon/annotorious-openseadragon.css';
-import '@annotorious/plugin-wires/annotorious-wires.css';
 
 const IIIF_SAMPLE = {
   "@context" : "http://iiif.io/api/image/2/context.json",
@@ -114,7 +113,8 @@ export const App = () => {
           )} />
         
         <OSDWiresPlugin 
-          enabled={relationsEnabled}>
+          enabled={relationsEnabled}
+          label="label">
           <OSDWirePopup
             popup={props => (<DemoLabelPopup {...props} />)} />
         </OSDWiresPlugin>
