@@ -121,15 +121,28 @@
     annotationLayer.addEventListener('pointerdown', onPointerDown);
 
     const onChange = (event: StoreChangeEvent<Annotation>) => {
-      const { created, deleted } = event.changes;
+      const { created, updated, deleted } = event.changes;
 
       const addedConnections = 
         (created || []).filter(isConnectionAnnotation);
 
+      const updatedConnections = 
+        (updated || []).filter(t => isConnectionAnnotation(t.oldValue));
+
+      const updatedIds = new Set(updatedConnections
+        .map(c => c.oldValue.id));
+
       const deletedIds =
         new Set((deleted || []).filter(isConnectionAnnotation).map(c => c.id));
 
-      connections = [...connections, ...addedConnections].filter(c => !deletedIds.has(c.id));
+      connections = [
+        ...connections.map(current => updatedIds.has(current.id) 
+          ? (updatedConnections
+            .find(u => u.oldValue.id === current.id)?.newValue || current) as ConnectionAnnotation
+          : current
+        ), 
+        ...addedConnections
+      ].filter(c => !deletedIds.has(c.id));
     }
 
     store.observe(onChange);

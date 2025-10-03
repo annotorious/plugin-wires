@@ -13,6 +13,8 @@
   export let isSelected: boolean;
   export let scale: number;
 
+  $: console.log('annotation', annotation);
+  
   export const getMidpoint = () => midPoint ? { x: midPoint.x, y: midPoint.y } : undefined;
 
   let pathElement: SVGPathElement;

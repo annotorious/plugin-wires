@@ -1,9 +1,8 @@
-import React from 'react';
-import { ConnectionPopupProps } from '../../src';
+import { WirePopupProps } from '../../src';
 
 const RELATIONS = ['is next to', 'is behind', 'is before'];
 
-export const DemoLabelPopup = (props: ConnectionPopupProps) => {
+export const DemoLabelPopup = (props: WirePopupProps) => {
 
   const value = props.annotation.bodies.find(b => b.purpose === 'tagging')?.value;
 

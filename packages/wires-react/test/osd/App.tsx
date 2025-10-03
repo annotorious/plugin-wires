@@ -114,7 +114,7 @@ export const App = () => {
         
         <OSDWiresPlugin 
           enabled={relationsEnabled}
-          label="label">
+          label={a => a.bodies.find(b => b.purpose === 'tagging')?.value}>
           <OSDWirePopup
             popup={props => (<DemoLabelPopup {...props} />)} />
         </OSDWiresPlugin>
