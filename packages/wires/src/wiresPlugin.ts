@@ -1,5 +1,5 @@
 import type { ImageAnnotation, ImageAnnotator, ImageAnnotatorState } from '@annotorious/annotorious';
-import type { Point } from './model';
+import type { ConnectionAnnotation, Point } from './model';
 import { WiresLayer } from './components/WiresLayer';
 import { createConnectionGraph } from './state';
 import type { WiresPluginOpts, WiresVisibility } from './WiresPluginOpts';
@@ -28,7 +28,7 @@ export const mountPlugin = (anno: ImageAnnotator<ImageAnnotation>, opts: WiresPl
       opts,
       enabled: isEnabled,
       graph,
-      state: anno.state as ImageAnnotatorState<ImageAnnotation>
+      state: anno.state as ImageAnnotatorState<ImageAnnotation | ConnectionAnnotation>
     }
   });
 

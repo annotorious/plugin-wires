@@ -5,6 +5,7 @@ import type { WiresPluginInstance } from './wiresPlugin';
 import { OSDWiresLayer } from './components/OSDWiresLayer';
 import { createConnectionGraph } from './state';
 import type { WiresPluginOpts, WiresVisibility } from './WiresPluginOpts';
+import type { ConnectionAnnotation } from './model';
 
 export const mountOSDPlugin = (
   anno: ImageAnnotator<ImageAnnotation>, 
@@ -30,7 +31,7 @@ export const mountOSDPlugin = (
           opts,
           enabled: isEnabled,
           graph,
-          state: anno.state as ImageAnnotatorState<ImageAnnotation>,
+          state: anno.state as ImageAnnotatorState<ImageAnnotation | ConnectionAnnotation>,
           viewer
         }
       })

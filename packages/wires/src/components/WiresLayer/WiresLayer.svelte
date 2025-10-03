@@ -7,10 +7,10 @@
   import { isConnectionAnnotation } from '../../model';
   import type { ConnectionAnnotation, PinnedWireHandle, Point, Wire, WireHandle } from '../../model';
   import type { ConnectionGraph } from '../../state';
-  import { Emphasis } from './emphasis';
-  import Connector from './Wire.svelte';
-  import RubberbandConnector from './RubberbandWire.svelte';
   import type { WiresPluginOpts } from '../../WiresPluginOpts';
+  import { Emphasis } from './emphasis';
+  import WireView from './Wire.svelte';
+  import RubberbandConnector from './RubberbandWire.svelte';
 
   const dispatch = createEventDispatcher<{ create: ConnectionAnnotation }>();
 
@@ -21,7 +21,7 @@
   export let layerTransform: string | undefined = undefined;
   export let pointerTransform: ((point: Point) => Point) | undefined = undefined;
   export let scale = 1;
-  export let state: ImageAnnotatorState<ImageAnnotation>;
+  export let state: ImageAnnotatorState<ImageAnnotation | ConnectionAnnotation>;
 
   let source: ImageAnnotation | undefined;
 
@@ -29,7 +29,7 @@
 
   let connections: ConnectionAnnotation[] = [];
 
-  let connectionRefs: { [key: string]: Connector } = {};
+  let wireRefs: { [key: string]: WireView } = {};
 
   let floatingWire: Wire | undefined;
 
@@ -42,7 +42,7 @@
   const { selection, store } = state;
 
   export const getMidpoint = (id: string) => {
-    const component = connectionRefs[id];
+    const component = wireRefs[id];
     if (component)
       return component.getMidpoint();
   }
@@ -76,7 +76,6 @@
         }
       }
 
-      // @ts-ignore
       store.addAnnotation(annotation);
 
       source = undefined;
@@ -94,7 +93,7 @@
         ? pointerTransform({ x: evt.offsetX, y: evt.offsetY })
         : getSVGPoint(evt, svgEl);
 
-    hovered = store.getAt(pt.x, pt.y);
+    hovered = store.getAt(pt.x, pt.y) as ImageAnnotation;
 
     if (enabled && source) {
       // Source defined - pick target
@@ -168,10 +167,10 @@
 
 <svg 
   bind:this={svgEl}
-  class="a9s-connector-layer"
+  class="a9s-wires-layer"
   class:hover={hovered}>
-  <g class="a9s-connectors-layer" transform={layerTransform}>
-    <g class="a9s-connectors-shape-emphasis">
+  <g class="a9s-wires-layer" transform={layerTransform}>
+    <g class="a9s-wire-emphasis">
       {#if enabled}
         {#if source}
           <Emphasis annotation={source} />
@@ -187,11 +186,12 @@
       {/if}
     </g>
 
-    <g class="a9s-connectors">
+    <g class="a9s-wires">
       {#each getVisibleConnections() as connection}
-        <Connector
-          bind:this={connectionRefs[connection.id]}
+        <WireView
+          bind:this={wireRefs[connection.id]}
           annotation={connection}
+          opts={opts}
           scale={scale}
           state={state} 
           isSelected={isSelected(connection.id)}/>

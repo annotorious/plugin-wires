@@ -4,7 +4,7 @@
   import type { ImageAnnotation } from '@annotorious/openseadragon';
   import { WiresLayer } from '../WiresLayer';
   import OSDSVGLayer from './OSDSVGLayer.svelte';
-  import type { Point } from '../../model';
+  import type { ConnectionAnnotation, Point } from '../../model';
   import type { ConnectionGraph } from '../../state';
   import type { WiresPluginOpts } from '../../WiresPluginOpts';
 
@@ -12,7 +12,7 @@
   export let opts: WiresPluginOpts;
   export let enabled: boolean;
   export let graph: ConnectionGraph;
-  export let state: ImageAnnotatorState<ImageAnnotation>;
+  export let state: ImageAnnotatorState<ImageAnnotation | ConnectionAnnotation>;
   export let viewer: OpenSeadragon.Viewer;
 
   let connectorLayer: WiresLayer;
