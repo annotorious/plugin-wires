@@ -5,7 +5,7 @@
   "author": "Rainer Simon",
   "repository": {
     "type": "git",
-    "url": "https://github.com/recogito/annotorious.git"
+    "url": "https://github.com/annotorious/plugin-wires.git"
   },
   "license": "BSD-3-Clause",
   "scripts": {
